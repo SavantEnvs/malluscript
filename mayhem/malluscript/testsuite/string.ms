@@ -1,0 +1,2 @@
+name = "test";
+kanikuga name;

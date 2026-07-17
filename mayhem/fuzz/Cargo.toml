@@ -1,0 +1,24 @@
+[package]
+name = "malluscript"
+version = "0.0.0"
+edition = "2018"
+publish = false
+
+# cargo-fuzz metadata — cargo fuzz build reads this
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+# lalrpop-util is needed by src/parser/grammar.rs (auto-generated parser tables)
+lalrpop-util = "0.20.0"
+
+[[bin]]
+name = "malluscript"
+path = "fuzz_targets/malluscript.rs"
+test = false
+doc = false
+
+# Standalone workspace so cargo-fuzz doesn't pick up the parent malluscript workspace
+# (and does not re-run malluscript's build.rs / lalrpop code-gen).
+[workspace]
